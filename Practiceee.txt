@@ -1,0 +1,95 @@
+#14 Python
+sudo add-apt-repository ppa:deadsnakes/ppa
+ls /usr/bin |grep 
+python3 --version
+gedit py2.py
+python3 py2.py
+
+#15 PhpMyAdmin
+install phpmyadmin
+systemctl restart apache2
+systemctl restart mysql.service
+systemctl status apache2
+systemctl restart mysql.service
+ls /etc/php,phpmyadmin,apache2
+update,restart apache2
+dpkg-reconfigure phpmyadmin
+localhost/phpmy..
+
+#16 Openssh
+download putty
+install openssh-server
+ls /etc/ssh,ssh_config,.d
+status
+take ip go window
+sometimes systemctl start ssh
+
+#17 Ftp
+sudo apt install vsftpd
+cp /etc/vsftpd.conf /etc/vsftpd.conf.original
+gedit /etc/vsftpd.conf 
+uncomment write31 35local
+addlast pasv_min_port=40000
+pasv_max_port=50000
+ufw allow 21/tcp,20/tcp,40000:50000/tcp,OpenSSH
+connect on ur machine using sudo ftp ip 
+ftp>bye
+windows filezilla client
+
+#18 SMTP
+apt install postfix
+configure: internetsite
+telnet kartik04 25
+MAIL FROM:machine@machine
+RCPT TO:machine@machine
+DATA
+Sairam
+.
+QUIT
+apt install mailutils
+mail 
+1
+
+#19 Samba
+sudo apt update
+sudo apt install samba
+check: ls /etc/samba
+pro->SambaDir->LNS->select->Share this->Allowother
+shared symbol on dir
+gedit smd.conf->
+[SambaDir]
+ comment = Welcome
+ path = /home/kartik04/Desktop/SambaDir
+ read only = NO
+ browsable = YES
+sudo systemctl status smbd.service
+sudo ufw allow samba
+ls -l 
+sudo smbpassword -a machine
+root
+gedit smb.conf
+valid user = machine
+restart sytemctl restart smbd.service
+create file myfile1 add content
+hostname -I
+go to windows 
+\\ip
+
+
+#20 OpenLDAP
+sudo apt install slapd ldap-utils
+sudo slapcat
+cp /etc/ldap/ldap.conf to ./ldap.conf.original
+sudo gedit /etc/ldap/ldap.conf
+8,9  #-   dc=kc   ldap=localhost
+sudo dpkg-reconfigure slapd
+kc.com kc nodb moveolddb-yes
+ldapsearch -x
+apt install phpldapadmin
+cp /etc/phpldapadmin/config.php to ./config.php.original
+sudo gedit /etc/phpmyadmin/config.php
+329->$servers->setValue('server','base',array('dc=kc,dc=com'));
+356->$servers->setValue('login','bind_id',cn=admin,dc=kc,dc=com');
+systemctl restart apache2
+localhostphpldapadmin
+
