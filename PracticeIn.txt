@@ -1,0 +1,136 @@
+CAESAR CIPHER
+def encrypt(msg,key):
+    result = ""
+    for i in range(len(msg)):
+        char = msg[i]
+        if(char.isupper()):
+            result += chr((ord(char) + key - 65) % 26 + 65)
+        else:
+            result += chr((ord(char) + key - 97) % 26 + 97)
+    return result
+msg = input("Enter message: ")
+key = int(input("Enter key: "))
+print("Original Message: ",msg)
+str(key)
+print("Encrypted Text: ", encrypt(msg,key))
+
+RAILFENCE CIPHER
+def RailFence(msg):
+    result = ""
+    for i in range(len(msg)):
+        if(i%2==0):
+            result += msg[i]
+    for i in range(len(msg)):
+        if(i%2!=0):
+            result += msg[i]
+    return result
+
+msg = input("Enter input: ")
+print("Original message: ",msg)
+print("Encrypted message: ",RailFence(msg))
+
+RSA
+pip install pycryptodome
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP
+import binascii
+keyPair = RSA.generate(1024)
+pubKey = keyPair.publickey()
+print(f"Public key: (n={hex(pubKey.n)},e={pubKey.e})")
+print(pubKey.exportKey().decode('ascii'))
+print(f"Private key: (n={hex(pubKey.n)},d={hex(keyPair.d)})")
+print(keyPair.exportKey().decode('ascii'))
+msg = input("Enter message: ").encode('utf-8')
+print("Original Message: ",msg)
+encrypted = PKCS1_OAEP.new(pubKey).encrypt(msg)
+print("Encrypted Message: ",encrypted)
+
+Deffie
+from random import randint
+if __name__ == '__main__':
+    p = 23
+    g = 9
+    print("The value of P is : %d " %(p))
+    print("The value of G is : %d " %(g))
+    a = 5
+    print("Secret number foralice is: %d " %(a))
+    x = int(pow(g, a, p))
+    b = 3
+    print("Secret number forbob is: %d " %(b))
+    y = int(pow(g, b, p))
+    ka = int(pow(y, a, p))
+    kb = int(pow(x, b, p))
+    print("Secret number foraice is : %d " %(ka))
+    print("Secret number forbob is: %d " %(kb)
+
+sha
+import hashlib
+str = input("Enter the value to encode: ")
+result = hashlib.sha1(str.encode())
+print("The hexadecimal equivalent of SHA1 is: ")
+print(result.hexdigest())
+
+md5
+import hashlib
+result = hashlib.md5(b'Sai')
+result1 = hashlib.md5(b'Sai')
+#printing the equivalent byte value
+print("The byte equivalent of hash is: ",end = " ")
+print(result.digest())
+print("The byte equivalent of hash is: ",end = " ")
+print(result1.digest())
+
+
+mono
+import java.util.Scanner;
+
+public class MonoalphabeticCipher {
+
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String CIPHER_ALPHABET = "QWERTYUIOPASDFGHJKLZXCVBNM"; // Example cipher alphabet
+
+    // Encrypts the plaintext using the cipher alphabet
+    public static String encrypt(String plaintext) {
+        StringBuilder ciphertext = new StringBuilder();
+        for (char c : plaintext.toUpperCase().toCharArray()) {
+            if (ALPHABET.indexOf(c) != -1) {
+                int index = ALPHABET.indexOf(c);
+                ciphertext.append(CIPHER_ALPHABET.charAt(index));
+            } else {
+                ciphertext.append(c); // Non-alphabet characters are added unchanged
+            }
+        }
+        return ciphertext.toString(); // Corrected
+    }
+
+    // Decrypts the ciphertext using the cipher alphabet
+    public static String decrypt(String ciphertext) {
+        StringBuilder plaintext = new StringBuilder();
+        for (char c : ciphertext.toUpperCase().toCharArray()) {
+            if (CIPHER_ALPHABET.indexOf(c) != -1) {
+                int index = CIPHER_ALPHABET.indexOf(c);
+                plaintext.append(ALPHABET.charAt(index));
+            } else {
+                plaintext.append(c); // Non-alphabet characters are added unchanged
+            }
+        }
+        return plaintext.toString(); // Corrected
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the plaintext: ");
+        String plaintext = scanner.nextLine();
+        String ciphertext = encrypt(plaintext);
+        System.out.println("Encrypted text: " + ciphertext);
+
+        System.out.print("Enter the ciphertext to decrypt: ");
+        String inputCiphertext = scanner.nextLine();
+        String decryptedText = decrypt(inputCiphertext);
+        System.out.println("Decrypted text: " + decryptedText);
+
+        scanner.close();
+    }
+}
+
